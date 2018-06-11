@@ -5,6 +5,7 @@
 // *** Dependencies
 // =============================================================
 var express = require("express");
+var passport = require('passport');
 var bodyParser = require("body-parser");
 
 // Sets up the Express App
@@ -25,11 +26,19 @@ app.use(bodyParser.json());
 // Static directory
 app.use(express.static("public"));
 
+app.use(session({
+  secret: config.use_secret,
+  resave: true,
+  saveUninitialized: true
+})); // session secret
+app.use(passport.initialize());
+app.use(passport.session());
 // Routes
 // =============================================================
 require("./routes/api-routes")(app);
 require("./routes/html-routes")(app);
 
+require('./config/passport/passport.js')(passport, db.User);
 // Syncing our sequelize models and then starting the Express app
 // =============================================================
 db.sequelize.sync({ force: true }).then(function() {
