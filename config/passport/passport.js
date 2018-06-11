@@ -57,7 +57,7 @@ module.exports = function(passport, user) {
             {
                 //runs userPassword thorugh encryption
                 var userPassword = generateHash(password);
-         //These are the entries for the database
+                //These are the entries for the database
                 var data =
          
                     {
@@ -73,7 +73,7 @@ module.exports = function(passport, user) {
          
                     };
          
-                //pass the entries into a create Sequelize fuction
+                //pass the entries into a create Sequelize function
                 User.create(data).then(function(newUser, created) {
          
                     if (!newUser) {
