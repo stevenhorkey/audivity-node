@@ -6,7 +6,7 @@
 // =============================================================
 
 // Routes
-var db = require("../models");
+var db = require(__dirname+"/../Models");
 var axios = require("axios")
 
 module.exports = function (app) {
